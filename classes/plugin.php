@@ -48,6 +48,7 @@ class GifDrop_Plugin {
 		add_action( 'root_rewrite_rules', array( $this, 'inject_rewrite_rules' ), 99 );
 		add_action( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 20, 2 );
 		add_filter( 'plugin_action_links_' . plugin_basename($this->__FILE__), array( $this, 'plugin_action_links' ) );
+		add_action( 'wp', array( $this, 'redirect_short_url' ) );
 	}
 
 	/**
@@ -609,5 +610,27 @@ class GifDrop_Plugin {
 	public function plugin_action_links( $links ) {
 		$links[] = '<a href="'. $this->admin_url() .'">' . __( 'Settings', 'gifdrop' ) . '</a>';
 		return $links;
+	}
+
+	/**
+	 * Checks the existence of a given file by the path and redirects to the full url
+	 */
+	public function redirect_short_url() {
+		// bail if we're in the admin
+		if ( is_admin() ) {
+			return;
+		}
+
+		$endpoint = $_SERVER['REQUEST_URI'];
+		$upload_dir = wp_upload_dir();
+		$gifdrop_dir = trailingslashit( $upload_dir['basedir'] ) . 'gifdrop';
+
+		// bail if the file doesn't exist
+		if ( ! file_exists( $gifdrop_dir . $endpoint ) ) {
+			return;
+		}
+
+		wp_redirect( trailingslashit( $upload_dir['baseurl'] ) . 'gifdrop' . $endpoint );
+		exit;
 	}
 }
