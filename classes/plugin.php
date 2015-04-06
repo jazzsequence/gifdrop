@@ -622,6 +622,12 @@ class GifDrop_Plugin {
 		}
 
 		$endpoint = $_SERVER['REQUEST_URI'];
+
+		//  bail if we're in the root
+		if ( '/' == $endpoint ) {
+			return;
+		}
+
 		$upload_dir = wp_upload_dir();
 		$gifdrop_dir = trailingslashit( $upload_dir['basedir'] ) . 'gifdrop';
 
