@@ -471,11 +471,12 @@ class GifDrop_Plugin {
 	 */
 	public function only_some_attachment_fields( &$attachment ) {
 		$full = wp_get_attachment_image_src( $attachment->ID, 'full' );
+		$short_url = home_url() . '/' . basename( $full[0] );
 		$static = wp_get_attachment_image_src( $attachment->ID, 'full-gif-static' );
 		$attachment = (object) array(
 			'id' => $attachment->ID,
-			'src' => $full[0],
-			'static' => $static ? $static[0] : $full[0],
+			'src' => $short_url,
+			'static' => $static ? $static[0] : $short_url,
 			'width' => $full[1],
 			'height' => $full[2],
 			'title' => $attachment->post_title,
