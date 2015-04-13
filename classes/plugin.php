@@ -630,14 +630,14 @@ class GifDrop_Plugin {
 		}
 
 		$upload_dir = wp_upload_dir();
-		$gifdrop_dir = trailingslashit( $upload_dir['basedir'] ) . 'gifdrop';
+		$gifdrop_dir = trailingslashit( $upload_dir['basedir'] ) . 'gifdrop/';
 
 		// bail if the file doesn't exist
-		if ( ! file_exists( $gifdrop_dir . $endpoint ) ) {
+		if ( ! file_exists( $gifdrop_dir . basename( $endpoint ) ) ) {
 			return;
 		}
 
-		wp_redirect( trailingslashit( $upload_dir['baseurl'] ) . 'gifdrop' . $endpoint );
+		wp_redirect( trailingslashit( $upload_dir['baseurl'] ) . 'gifdrop/' . basename( $endpoint ) );
 		exit;
 	}
 }
