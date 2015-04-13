@@ -629,6 +629,7 @@ class GifDrop_Plugin {
 			return;
 		}
 
+		// TODO: Make an option to use short urls (or not)
 		$upload_dir = wp_upload_dir();
 		$gifdrop_dir = trailingslashit( $upload_dir['basedir'] ) . 'gifdrop/';
 
