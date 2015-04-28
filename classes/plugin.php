@@ -426,6 +426,10 @@ class GifDrop_Plugin {
 			$this->update_path( $_post['gifdrop_path'] );
 		}
 
+		// handle short url setting
+		$shorturls = ! empty( $_post['gifdrop_shorturls'] ) ? 1 : '';
+		$this->set_option( 'shorturls', $shorturls );
+
 		wp_redirect( $this->admin_url() . '&updated=true' );
 		exit;
 	}
