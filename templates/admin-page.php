@@ -29,7 +29,7 @@
 			<tr valign="top">
 				<th scope="row"><label for="gifdrop-shorturls"><?php _e( 'Short URLs', 'gifdrop' ); ?></label></th>
 				<td class="gifdrop-use-short-urls-section">
-					<input type="checkbox" id="gifdrop-shorturls" name="gifdrop_shorturls" value="<?php echo esc_attr( $this->get_option( 'shorturls' ) ); ?>" />
+					<input type="checkbox" id="gifdrop-shorturls" name="gifdrop_shorturls" value="1" <?php checked( $this->get_option( 'shorturls', 1 ) ); ?> />
 					<p class="description"><?php echo sprintf( __( 'If enabled, image URLs will be shortened (e.g. %s).', 'gifdrop' ), home_url( 'xy.gif' ) ); ?></p>
 				</td>
 			</tr>
